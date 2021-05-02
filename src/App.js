@@ -5,6 +5,7 @@ import './App.css';
 
 import Login from './components/login.js'
 import Register from './components/register.js'
+import RegisterAdmin from './components/registerAdmin.js'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component{
@@ -27,6 +28,7 @@ render(){
                 <Switch>
                       <Route exact path="/login" component={()=><Login />} />
                       <Route exact path="/register" component={()=><Register />} />
+                      <Route exact path="/registerAdmin" component={()=><RegisterAdmin />} />
                   
                 </Switch>
   

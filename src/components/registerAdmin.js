@@ -1,35 +1,52 @@
 import React ,{Component} from 'react';
-import '../components_css/login.css'
+import '../components_css/register.css'
 import firebase from '../helper/firebase'
 
 
 
-class Register extends Component{  
+class RegisterAdmin extends Component{  
 
 constructor(props){
       super(props);
-      this.state = {name:'',email: '',password:''};
+      this.state = {email: '',password:'',name:'',phone:'',location:'',occupation:'',keywords:''};
       this.submitHandler = this.submitHandler.bind(this);
       this.emailOnChangeHandler = this.emailOnChangeHandler.bind(this);
       this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this);
       this.nameOnChangeHandler = this.nameOnChangeHandler.bind(this);
+      this.phoneOnChangeHandler = this.phoneOnChangeHandler.bind(this);
+      this.locationOnChangeHandler = this.locationOnChangeHandler.bind(this);
+      this.occupationOnChangeHandler = this.occupationOnChangeHandler.bind(this);
 
 };
   
   
   
 async componentWillMount(){
-      //await this.loadWeb3()
       
+    var items=[{key:1,item:'enginerr'},{key:2,item:'doctor'}]
+    this.setState({keywords:items});
+
+      
+}
+//upadtes email
+emailOnChangeHandler(event){
+    this.setState({email: event.target.value});
 }
 //update name
 nameOnChangeHandler(event){
     this.setState({name: event.target.value});
 }
-
-//upadtes email
-emailOnChangeHandler(event){
-    this.setState({email: event.target.value});
+//update phone
+phoneOnChangeHandler(event){
+    this.setState({phone: event.target.value});
+}
+//update location
+locationOnChangeHandler(event){
+    this.setState({location: event.target.value});
+}
+//update location
+occupationOnChangeHandler(event){
+    this.setState({occupation: event.target.value});
 }
 //updates password
 passwordOnChangeHandler(event){
@@ -41,14 +58,17 @@ submitHandler(event){
 firebase.auth()
 .createUserWithEmailAndPassword(this.state.email,this.state.password)
 .then(response=>{                      //succcessfull registration
-    firebase.firestore().collection('users').add({
+    firebase.firestore().collection('serviceProviders').add({
     email: this.state.email,
-    name :this.state.name,
+    name : this.state.name,
     password:this.state.password,
+    phone:this.state.phone,
+    location:this.state.location,
+    occupation:this.state.occupation,
     uid:response.user.uid
-    }).then((result)=>{
-    console.log("result : "+result)
-    }).catch((err)=>{
+    }).then((result=>{
+         console.log("result : "+result)
+    })).catch((err)=>{
         console.log("error : "+err)
     })
 
@@ -78,7 +98,7 @@ render(){
       return (
       <div>
              <form>
-                <h3>Register</h3>
+                <h3>Register As Admin</h3>
                 <div className="form-group">
                     <label>Name</label>
                     <input type="text" value={this.state.name} className="form-control" placeholder="Enter name" onChange={this.nameOnChangeHandler} />
@@ -87,6 +107,25 @@ render(){
                     <label>Email address</label>
                     <input type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
                 </div>
+                <div className="form-group">
+                    <label>Contact Number</label>
+                    <input type="text" value={this.state.phone} className="form-control" placeholder="Enter mobile number" onChange={this.phoneOnChangeHandler} />
+                </div>
+                <div className="form-group">
+                    <label>Location</label>
+                    <input type="text" value={this.state.location} className="form-control" placeholder="Enter city, district or town" onChange={this.locationOnChangeHandler} />
+                </div>
+                <div className="form-grou">
+                    <label>Occupation</label> <br></br>
+                    <input list="brow" onChange={this.occupationOnChangeHandler}/>
+                    <datalist id="brow">
+                        {this.state.keywords.map((t) =>
+                        <option key={t.key} value={t.item} />
+                        )}
+                    </datalist>
+                    
+                </div>
+
 
                 <div className="form-group">
                     <label>Password</label>
@@ -112,4 +151,4 @@ render(){
    
 }
   
-  export default Register;
+  export default RegisterAdmin;
