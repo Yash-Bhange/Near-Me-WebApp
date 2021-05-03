@@ -65,6 +65,7 @@ firebase.auth()
 
     if(this.state.isProvider==true){
        
+        
         firebase.firestore().collection('serviceProviders').where('uid','==',response.user.uid).get().then((snapshot)=>{
             console.log(snapshot,"first")
             if(snapshot.empty){
@@ -137,7 +138,7 @@ render(){
 
                 <a  className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                   Don't have account ? <a href="/register">Register here</a>
                 </p>
             </form>
       </div>

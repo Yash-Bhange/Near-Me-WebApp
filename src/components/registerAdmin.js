@@ -16,6 +16,7 @@ constructor(props){
       this.phoneOnChangeHandler = this.phoneOnChangeHandler.bind(this);
       this.locationOnChangeHandler = this.locationOnChangeHandler.bind(this);
       this.occupationOnChangeHandler = this.occupationOnChangeHandler.bind(this);
+      this.loadkeywords=this.loadkeywords.bind(this);
 
 };
   
@@ -23,11 +24,32 @@ constructor(props){
   
 async componentWillMount(){
       
-    var items=[{key:1,item:'enginerr'},{key:2,item:'doctor'}]
+    var items=[{key:1,item:'fetching...'}]
     this.setState({keywords:items});
+    await this.loadkeywords()
 
       
 }
+
+
+async loadkeywords(){
+    firebase.firestore().collection('occupations').get().then((snapshot=>{
+      let array=[];
+      snapshot.docs.forEach((doc=>{
+          array.push(doc.data())
+      }))
+
+      this.setState({
+          keywords:array
+      })
+ 
+
+
+        })).catch((err)=>{
+            console.log("error : "+err)
+        })
+}
+
 //upadtes email
 emailOnChangeHandler(event){
     this.setState({email: event.target.value});
@@ -117,8 +139,8 @@ render(){
                 </div>
                 <div className="form-grou">
                     <label>Occupation</label> <br></br>
-                    <input list="brow" onChange={this.occupationOnChangeHandler}/>
-                    <datalist id="brow">
+                    <input list="brow" minlength="2" style="height:5.1em" onChange={this.occupationOnChangeHandler}/>
+                    <datalist id="brow" style="height:5.1em;overflow:hidden">
                         {this.state.keywords.map((t) =>
                         <option key={t.key} value={t.item} />
                         )}
