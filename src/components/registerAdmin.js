@@ -139,8 +139,8 @@ render(){
                 </div>
                 <div className="form-grou">
                     <label>Occupation</label> <br></br>
-                    <input list="brow" minlength="2" style="height:5.1em" onChange={this.occupationOnChangeHandler}/>
-                    <datalist id="brow" style="height:5.1em;overflow:hidden">
+                    <input list="brow"  onChange={this.occupationOnChangeHandler}/>
+                    <datalist id="brow" >
                         {this.state.keywords.map((t) =>
                         <option key={t.key} value={t.item} />
                         )}

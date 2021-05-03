@@ -64,7 +64,7 @@ go(){
             console.log("exce1")
             console.log("name:"+doc.data().name)
             //code to show service providers
-            
+
             
 
         }))
@@ -90,7 +90,7 @@ render(){
              <input list="occupation" onChange={this.occupationOnChangeHandler} />
                     <datalist id="occupation" >
                         {this.state.keywords.map((t) =>
-                        <option  value={t.item} />
+                        <option key={t.key}  value={t.item} />
                         )}
                     </datalist>
             </form>
