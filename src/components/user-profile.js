@@ -12,11 +12,13 @@ constructor(props){
       super(props);
 
       this.state = {
-          userid:null,
-          userInfo:null
+        name:'',
+        email:'',
+        password:'',
+        uid:''
+         
       };
-      var val= String(this.props.match.params.ID);
-      this.setState({userid:val})
+ 
       this.loadUserDetails=this.loadUserDetails.bind(this);
 
       
@@ -28,21 +30,25 @@ constructor(props){
   
   
   
-async componentWillMount(){
+componentDidMount(){
    
-await this.loadUserDetails();
+ this.loadUserDetails();
       
 }
 
- loadUserDetails(){
+loadUserDetails(){
     
-    console.log("yash"+this.state.userid)
-    firebase.firestore().collection('users').where('uid','==',String(this.state.userid)).get().then((snapshot=>{
-       
-        console.log(snapshot.docs)
-        snapshot.forEach(function(doc){
-            console.log(doc.data())
+    
+    firebase.firestore().collection('users').where('uid','==',String(this.props.match.params.ID)).get().then((snapshot=>{
+        let localUser;
+        snapshot.docs.forEach(function(doc){
+            
+            localUser=doc.data();
+           
+            
         })
+        this.setState({name:localUser.name,uid:localUser.uid,email:localUser.email,password:localUser.password});
+    
        
           })).catch((err)=>{
               console.log("error : "+err)
@@ -57,11 +63,13 @@ await this.loadUserDetails();
 render(){
              
       return (
-      <div> 
-              <p>{this.state.userInfo}</p>
-     
+            <div> 
+            
+            
+                <p>{this.state.name}</p>
+            
 
-      </div>
+            </div>
             );
   
 }

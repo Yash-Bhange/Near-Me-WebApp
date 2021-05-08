@@ -11,7 +11,7 @@ class ServiceProviderProfile extends Component{
 constructor(props){
       super(props);
       this.state = {
-        userid:null
+        userInfo:null
     };
     this.setState({userid:this.props.match.params.ID})
     this.loadUserDetails=this.loadUserDetails.bind(this);
@@ -20,15 +20,30 @@ constructor(props){
 };
   
   
-async componentWillMount(){
+async componentDidMount(){
    
     await this.loadUserDetails();
           
-    }
+}
     
-    async loadUserDetails(){
+async loadUserDetails(){
+
+    firebase.firestore().collection('serviceProviders').where('uid','==',String(this.props.match.params.ID)).get().then((snapshot=>{
+        let localUser;
+        snapshot.docs.forEach(function(doc){
+            
+            localUser=doc.data();
+           
+            
+        })
+        //this.setState({userInfo:localUser});
         
-    }
+       
+          })).catch((err)=>{
+              console.log("error : "+err)
+          })
+        
+}
   
 
 
