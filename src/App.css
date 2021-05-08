@@ -62,7 +62,7 @@ ul li a {
   color: #fff;
 }
 
-ul li a:hover { background: #2c3e50; }
+ul li a:hover { background: #b8c1ca; }
 
 li:hover > ul {
   display: block;
@@ -73,7 +73,7 @@ li:hover li { float: none; }
 
 li:hover a { background: #1bc2a2; }
 
-li:hover li a:hover { background: #2c3e50; }
+li:hover li a:hover { background: #b8c1ca; }
 
 .main-navigation li ul li { border-top: 0; }
 
@@ -92,5 +92,5 @@ ul:after { clear: both; }
 
 #account{
   float:right;
-  margin-right: 10%;
+  margin-right: 11%;
 }
