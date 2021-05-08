@@ -61,10 +61,10 @@ ProfileHandler(){
     else{
         
       if(this.state.isProvider==true){
-        window.location.href='service-provider-profile/'+this.state.userid;
+        window.location.href='/service-provider-profile/'+this.state.userid;
       }
       else{
-        window.location.href='user-profile/'+this.state.userid;
+        window.location.href='/user-profile/'+this.state.userid;
       }
        
 

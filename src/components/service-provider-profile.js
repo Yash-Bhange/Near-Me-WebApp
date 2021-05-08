@@ -14,10 +14,21 @@ constructor(props){
         userid:null
     };
     this.setState({userid:this.props.match.params.ID})
+    this.loadUserDetails=this.loadUserDetails.bind(this);
      
 
 };
   
+  
+async componentWillMount(){
+   
+    await this.loadUserDetails();
+          
+    }
+    
+    async loadUserDetails(){
+        
+    }
   
 
 
