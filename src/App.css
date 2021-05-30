@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin: 0;
 }
 
 .App-logo {
@@ -37,7 +38,6 @@
   }
 }
 
-
 ul {
   list-style: none;
   padding: 0;
@@ -52,7 +52,9 @@ ul li {
   background: #1bc2a2;
 }
 
-li ul { display: none; }
+li ul {
+  display: none;
+}
 
 ul li a {
   display: block;
@@ -62,20 +64,30 @@ ul li a {
   color: #fff;
 }
 
-ul li a:hover { background: #b8c1ca; }
+ul li a:hover {
+  background: #b8c1ca;
+}
 
 li:hover > ul {
   display: block;
   position: absolute;
 }
 
-li:hover li { float: none; }
+li:hover li {
+  float: none;
+}
 
-li:hover a { background: #1bc2a2; }
+li:hover a {
+  background: #1bc2a2;
+}
 
-li:hover li a:hover { background: #b8c1ca; }
+li:hover li a:hover {
+  background: #b8c1ca;
+}
 
-.main-navigation li ul li { border-top: 0; }
+.main-navigation li ul li {
+  border-top: 0;
+}
 
 ul ul ul {
   left: 100%;
@@ -88,9 +100,11 @@ ul:after {
   display: table; /* 2 */
 }
 
-ul:after { clear: both; }
+ul:after {
+  clear: both;
+}
 
-#account{
-  float:right;
+#account {
+  float: right;
   margin-right: 11%;
 }
