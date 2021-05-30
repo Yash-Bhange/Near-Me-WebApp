@@ -8,6 +8,8 @@ import RegisterAdmin from "./components/registerAdmin.js";
 import Review from "./components/review.js";
 import Explore from "./components/explore.js";
 import UserProfile from "./components/user-profile.js";
+import Help from "./components/help.js";
+import About from "./components/aboutUs.js";
 import ServiceProviderProfile from "./components/service-provider-profile.js";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
@@ -69,13 +71,13 @@ class App extends Component {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="explore">Find</Link>
+                <Link to="/explore">Find</Link>
               </li>
               <li>
-                <Link to="#">Help/FAQ</Link>
+                <Link to="/help">Help</Link>
               </li>
               <li>
-                <Link to="#">About Us</Link>
+                <Link to="/about">About Us</Link>
               </li>
               <li id="account">
                 <Link to="#">Accounts</Link>
@@ -141,6 +143,16 @@ class App extends Component {
               path="/service-provider-profile/:ID"
               exact
               component={() => <ServiceProviderProfile />}
+            />
+            <Route
+              path="/help"
+              exact
+              component={() => <Help />}
+            />
+            <Route
+              path="/about"
+              exact
+              component={() => <About />}
             />
           </Switch>
         </div>

@@ -116,7 +116,7 @@ class Explore extends Component {
 
         <div className="results">
           {this.state.found == 0
-            ? "khud se kr"
+            ? "No Service Provide available"
             : this.state.providers.map((provider) => {
                 return <Result provider={provider} />;
               })}
