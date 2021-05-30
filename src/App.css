@@ -92,5 +92,19 @@ ul:after { clear: both; }
 
 #account{
   float:right;
-  margin-right: 11%;
+  margin-right: 18%;
+}
+
+@media only screen and (max-width: 900px) {
+
+  .main-navigation{
+    font-size:x-small;
+  }
+
+  #account{
+    margin-right: 17%;
+  }
+
+
+  
 }

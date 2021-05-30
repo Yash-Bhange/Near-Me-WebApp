@@ -85,12 +85,12 @@ firebase.auth()
             console.log(snapshot,"second")
             if(snapshot.empty){
                 console.log("unmatched error");
-                return ;
+                return;
             }
-           this.setLocalStorage(response);
+            this.setLocalStorage(response);
             
 
-        }).catch(err=>{
+        }).catch(err=>{ 
             console.log("error occured in block2",err)
             return ;
         })

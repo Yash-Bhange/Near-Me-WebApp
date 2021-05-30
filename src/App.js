@@ -1,5 +1,5 @@
-
 import React ,{Component} from 'react';
+
 import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom';
 import './App.css';
 
@@ -28,6 +28,7 @@ class App extends Component{
   this.ProfileHandler=this.ProfileHandler.bind(this);
 
 };
+
 async componentWillMount(){
   await this.loadUser();
     
@@ -45,6 +46,7 @@ async loadUser(){
 
   }
 }
+
 logout(){
   localStorage.setItem('user',null);
   window.alert("logged out of session !")
@@ -79,7 +81,7 @@ render(){
 <div>
 <ul class="main-navigation">
   <li><a href="/">Home</a></li>
-  <li><a href="explore">Explore</a></li>
+  <li><a href="/explore">Explore</a></li>
   <li><a href="#">Help/FAQ</a></li>
   <li><a href="#">About Us</a></li>
   <li id="account"><a href="#">Accounts</a>
@@ -87,7 +89,7 @@ render(){
       <li><a href="#" onClick={this.ProfileHandler}>Profile</a></li>
       { this.state.userid==null? <li><a href="login">Login</a></li> : <li><a href="#" onClick={this.logout}>Logout</a></li>}
       
-      <li><a href="#">Register as -> </a>
+      <li><a href="#">Register as: </a>
         <ul >
           <li ><a href="register">Normal user</a></li>
           <li ><a href="registerAdmin">Service Provider</a></li>
@@ -100,6 +102,7 @@ render(){
 </ul>
 </div>
 <br></br>
+
 <div>
 yash bhange
 </div>
@@ -127,5 +130,6 @@ yash bhange
 }
   
 }
+
 
 export default App;
