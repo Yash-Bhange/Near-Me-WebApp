@@ -187,7 +187,7 @@ class App extends Component {
  
  <div>
  <i class="fa fa-envelope"></i>
- <p><a href="mailto:support@company.com">yashbhange888@gmail.com.com</a></p>
+ <p><a href="mailto:support@company.com">yashbhange888@gmail.com</a></p>
  </div>
  
  </div>

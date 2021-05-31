@@ -47,6 +47,7 @@ setLocalStorage(response){
     const storage =localStorage.getItem('user');
     const loggedInUser=  storage !=null?JSON.parse(storage):null;
     console.log("loggedInUser : "+loggedInUser.email)
+    window.location.href="/home"
 }
 
 checkboxChangeHandler = () => {

@@ -1,16 +1,12 @@
-.prodviderpage {
-  box-sizing: border-box;
-  max-width: 100%;
-  height: 100%;
-  padding: 8%;
+#profileDiv{
+  display: inline-block;
   text-align: center;
-  margin: 0%;
-  border: 2px solid;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  transition: ease-in-out 0.4s;
-  background-color: rgb(238, 238, 238);
+  width: 100%;
+  
 }
-.prodviderpage .title {
-  color: rgb(0, 0, 0);
-  font-size: 22px;
+#accountHeader{
+  text-align: center;
+}
+#profileReviewHeader{
+  text-align: center;
 }
