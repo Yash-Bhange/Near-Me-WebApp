@@ -63,6 +63,7 @@ class App extends Component {
 
   render() {
     return (
+      <div>
       <BrowserRouter>
         <div>
           <div>
@@ -157,6 +158,64 @@ class App extends Component {
           </Switch>
         </div>
       </BrowserRouter>
+      
+      <div id="AppFooter">
+
+
+  <footer class="footer-distributed">
+ 
+ <div class="footer-left">
+ 
+ <h3>NEAR<span> ME</span></h3>
+ 
+ 
+ <br></br>
+ <p class="footer-company-name">WCE Mini Project II  All Rights Reserved. &copy; 2021</p>
+ </div>
+ 
+ <div class="footer-center">
+ 
+ <div>
+ <i class="fa fa-map-marker"></i>
+ <p><span>Walchand College Of Engineering </span> Sangli , India</p>
+ </div>
+ 
+ <div>
+ <i class="fa fa-phone"></i>
+ <p>+91-9146744882</p>
+ </div>
+ 
+ <div>
+ <i class="fa fa-envelope"></i>
+ <p><a href="mailto:support@company.com">yashbhange888@gmail.com.com</a></p>
+ </div>
+ 
+ </div>
+ 
+ <div class="footer-right">
+ 
+ <p class="footer-company-about">
+ <span>About the company</span>
+ 'Naer-Me' Multi-Sevice App is an aggregator with IT-based digital platform which aims to find win-win businnes opportunities for both th multi service app service and the service providers on an online platform.
+ </p>
+ 
+ <div class="footer-icons">
+ 
+ <a href="https://www.facebook.com/profile.php?id=100012438314245"><i class="fa fa-facebook"></i></a>
+ <a href="https://twitter.com/yashbhange1"><i class="fa fa-twitter"></i></a>
+ <a href="https://www.linkedin.com/in/yash-bhange/"><i class="fa fa-linkedin"></i></a>
+ <a href="https://github.com/Yash-Bhange"><i class="fa fa-github"></i></a>
+ 
+ </div>
+ 
+ </div>
+ 
+ </footer>
+ 
+
+      </div>
+
+      </div>
     );
   }
 }

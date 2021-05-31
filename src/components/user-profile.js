@@ -1,10 +1,7 @@
 import React ,{Component} from 'react';
 import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom';
 import { withRouter } from "react-router";
-
 import firebase from '../helper/firebase'
-
-
 
 class UserProfile extends Component{  
 
