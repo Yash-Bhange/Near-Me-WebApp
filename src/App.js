@@ -45,6 +45,7 @@ class App extends Component {
   logout() {
     localStorage.setItem("user", null);
     window.alert("logged out of session !");
+    window.location.href='/home'
   }
 
   ProfileHandler() {
@@ -105,10 +106,10 @@ class App extends Component {
                     <a href="#">Register as</a>
                     <ul>
                       <li>
-                        <a href="register">Normal user</a>
+                        <a href="/register">Normal user</a>
                       </li>
                       <li>
-                        <a href="registerAdmin">Service Provider</a>
+                        <a href="/registerAdmin">Service Provider</a>
                       </li>
                     </ul>
                   </li>
@@ -125,7 +126,7 @@ class App extends Component {
               path="/registerAdmin"
               component={() => <RegisterAdmin />}
             />
-            <Route exact path="/review" component={() => <Review />} />
+            
             <Route
               exact
               path="/explore"
@@ -154,6 +155,11 @@ class App extends Component {
               path="/about"
               exact
               component={() => <About />}
+            />
+            <Route
+              path="/addreview/:ID"
+              exact
+              component={() => <Review />}
             />
           </Switch>
         </div>

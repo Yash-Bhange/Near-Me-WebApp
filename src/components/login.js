@@ -47,6 +47,8 @@ setLocalStorage(response){
     const storage =localStorage.getItem('user');
     const loggedInUser=  storage !=null?JSON.parse(storage):null;
     console.log("loggedInUser : "+loggedInUser.email)
+    document.getElementById('loginSubmitButton').innerHTML="Submit"
+    alert("Successfull Login")
     window.location.href="/home"
 }
 
@@ -56,9 +58,7 @@ checkboxChangeHandler = () => {
   }
 
 submitHandler(){
-
-console.log(this.state.isProvider);
-
+document.getElementById('loginSubmitButton').innerHTML="Loading..."
 firebase.auth()
 .signInWithEmailAndPassword(this.state.email,this.state.password)
 .then(response=>{ 
@@ -77,6 +77,7 @@ firebase.auth()
       
         }).catch(err=>{
             console.log("error occured in block1")
+            alert("Error Occured")
             return ;
         })
 
@@ -86,6 +87,7 @@ firebase.auth()
             console.log(snapshot,"second")
             if(snapshot.empty){
                 console.log("unmatched error");
+                alert("Error Occured")
                 return;
             }
             this.setLocalStorage(response);
@@ -93,6 +95,7 @@ firebase.auth()
 
         }).catch(err=>{ 
             console.log("error occured in block2",err)
+            alert("Error Occured")
             return ;
         })
     }
@@ -103,6 +106,7 @@ firebase.auth()
 
 }).catch(err=>{
     console.log(err);
+    alert("Error Occured")
 })
 
 
@@ -137,7 +141,7 @@ render(){
                     </div>
                 </div>
 
-                <a  className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
+                <a id="loginSubmitButton" className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
                 <p className="forgot-password text-right">
                    Don't have account ? <a href="/register">Register here</a>
                 </p>

@@ -20,15 +20,16 @@ class ServiceProviderProfile extends Component {
       found:false,
       userid: null,
       email: null,
-      isProvider: null,
+      isProvider: false,
       editable :false,
       docID:'',
 
     };
-    this.setState({ userid: this.props.match.params.ID });
+    
     this.loadUserDetails = this.loadUserDetails.bind(this);
     this.loadUserReview=this.loadUserReview.bind(this);
     this.editButton=this.editButton.bind(this);
+    this.addReviewButton=this.addReviewButton.bind(this);
     this.loadUser = this.loadUser.bind(this);
     this.nameHandler=this.nameHandler.bind(this);
     this.emailHandler=this.emailHandler.bind(this);
@@ -249,8 +250,29 @@ async loadUserReview(){
 }
 
 
+addReviewButton(){
+  const user = localStorage.getItem("user");
+  const loggedInUser = user != null ? JSON.parse(user) : null;
+
+  if(loggedInUser.userid==String(this.props.match.params.ID)){
+    alert("you cannot add review to your own work");
+    return;
+  }
+  else if(loggedInUser.isProvider==true){
+    alert("Service Provider cannot add review to another service provider");
+    return;
+
+  }
+  var id=String(this.props.match.params.ID);
+  window.location.href="/addreview/" +id ;
+
+}
+
+
 
   render() {
+
+    
     return (
       
 
@@ -304,30 +326,49 @@ async loadUserReview(){
             }
             <br></br><br></br>
 
+
           </form>
-          <button id="EditSubmitButton" onClick={this.editButton}>Edit</button> &emsp; &emsp; <button id="addReviewButton">Add Review </button>
+          {
+            this.state.userid==(this.props.match.params.ID)?
+            <button id="EditSubmitButton" onClick={this.editButton}>Edit</button>
+            :
+            <span></span>
+
+          }
+          &emsp; &emsp;
+          {
+            this.state.userid!=(this.props.match.params.ID) && this.state.isProvider!=true?
+            <button onClick={this.addReviewButton} id="addReviewButton">Add Review </button>
+            :
+            <span></span>
+
+          }
+           
 
         </div>
         <hr></hr>
         <div id="profileReview">
             <div id="profileReviewHeader">
-                  <h5>Previous Work</h5>
+                  <h3>Previous Work</h3>
             </div>
             <br></br>
             <div id="reviewCards">
 
-            {this.state.found == false
-            ? "No Reviews Available"
-            : this.state.workReviews.map((review) => {
+            {
+            this.state.found == false
+            ? <div id="profileReviewHeader">
+                   <h6>No Previous Work available !</h6>
+              </div>
+            :
+            
+             this.state.workReviews.map((review) => {
               return <Preview key={review.userID} review={review}/>;
-            })}
+            })
+            }
 
 
 
             </div>
-
-           
-
 
         </div>
 

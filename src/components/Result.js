@@ -13,13 +13,7 @@ export const Result = ({ provider }) => {
       <p className="title">
         <i class="fas fa-phone"> </i> {provider.phone}
       </p>
-      <div>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span>
-      </div>
+      
       <Link
         to={{
           pathname: `/service-provider-profile/${provider.uid}`,

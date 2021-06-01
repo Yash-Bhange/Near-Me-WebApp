@@ -3,14 +3,15 @@ import "../components_css/Preview.css";
 import { Link } from "react-router-dom";
 
 export const Preview = ({ review }) => {
-  
+   
+  var userid="/user-profile/"+review.userID;
 
   return (
     <div>
 
    
     <div key={review.userId} className="prodviderCardReview">
-      <p className="title">{review.title}</p>
+      <p className="title"><b>{review.title}</b></p>
       <p className="title">{review.desc}</p>
       <p className="title">
         <i class="fas fa-dollar-sign"> </i> {review.amount}
@@ -21,9 +22,12 @@ export const Preview = ({ review }) => {
         <b>REVIEW</b><br></br>
         <p>{review.review}</p>
       </p>
-      <p>User : {review.userID}</p>
-
-      
+      <div id="sender">
+       
+            Review by - <a href={userid}><u>{review.userID}</u></a>
+       
+      </div>
+    
     </div>
     <br></br>
 

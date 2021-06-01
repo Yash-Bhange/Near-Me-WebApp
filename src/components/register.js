@@ -37,6 +37,7 @@ passwordOnChangeHandler(event){
 }
 //manages registration and firestore 
 submitHandler(event){
+    document.getElementById('registerSubmitButton').innerHTML="Loading...";
 
 firebase.auth()
 .createUserWithEmailAndPassword(this.state.email,this.state.password)
@@ -48,8 +49,15 @@ firebase.auth()
     uid:response.user.uid
     }).then((result)=>{
     console.log("result : "+result)
+    alert("successfully registerd !")
+    document.getElementById('registerSubmitButton').innerHTML="Submit";
+
+    window.location.href='/home'
+
     }).catch((err)=>{
         console.log("error : "+err)
+        document.getElementById('registerSubmitButton').innerHTML="Submit";
+        alert("error occured")
     })
 
 }).catch((err)=>{                  //failed in registration then...
@@ -57,12 +65,17 @@ firebase.auth()
     switch(err.code){
         case 'auth/email-already-in-use':
             console.log("auth/email-already-in-use");
+            document.getElementById('registerSubmitButton').innerHTML="Submit";
+            alert('auth/email-already-in-use')
             break;
         case 'auth/invalid-email':
             console.log("Invalid email");
+            document.getElementById('registerSubmitButton').innerHTML="Submit";
+            alert('auth/invalid-email')
             break;
         case 'auth/weak-password':
              console.log("weak password");
+             alert('auth/weak-password')
             break;   
     }
 
@@ -93,16 +106,10 @@ render(){
                     <input type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
                 </div>
 
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div>
 
-                <a  className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
+                <a id="registerSubmitButton"  className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                   
                 </p>
             </form>
       </div>

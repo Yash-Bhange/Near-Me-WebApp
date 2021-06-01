@@ -45,4 +45,7 @@
   .checked {
     color: orange;
   }
-  
+  #sender{
+    margin-right: 1%;
+    text-align: right;
+  }

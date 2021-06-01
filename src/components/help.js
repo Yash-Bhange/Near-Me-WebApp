@@ -87,12 +87,12 @@ render(){
                       <input class ="helpInput" type="email" placeholder="Enter Email" value={this.state.email} required onChange={this.emailHandler}/> <br></br><br></br>
                       
                       <textarea  rows="6" cols="62" placeholder="Enter your concern here !" value={this.state.msg} required onChange={this.msgHandler}></textarea> <br></br><br></br>
-                     
-
-                      <div id="helpSubmit">
+         
+                      
+                  </form>
+                  <div id="helpSubmit">
                          <button id="helpSubmitButton" type="submit" onClick={this.onSubmit}>SUBMIT</button>
                      </div>
-                  </form>
                 
                   
                   
