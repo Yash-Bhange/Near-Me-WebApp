@@ -68,6 +68,8 @@ submitHandler(event){
      //succcessfull registration
     const user = localStorage.getItem("user");
     const loggedInUser = user != null ? JSON.parse(user) : null;
+    var currDate=new Date();
+    var fdate=String(currDate.getDate())+'/'+String(currDate.getMonth())+'/'+String(currDate.getFullYear());
     
 
     firebase.firestore().collection('reviews').add({
@@ -75,6 +77,7 @@ submitHandler(event){
     desc :this.state.desc,
     amount:this.state.amount,
     review: this.state.review,
+    date:fdate,
     stars:this.state.star,
     userID:loggedInUser.userid,
     serviceProviderID :this.props.match.params.ID    //service provider id in url

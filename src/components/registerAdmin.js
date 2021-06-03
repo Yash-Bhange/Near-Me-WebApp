@@ -8,7 +8,7 @@ class RegisterAdmin extends Component{
 
 constructor(props){
       super(props);
-      this.state = {email: '',password:'',name:'',phone:'',location:'',occupation:'',keywords:''};
+      this.state = {email: '',password:'',name:'',phone:'',location:'',occupation:'',pinCode:'',keywords:''};
       this.submitHandler = this.submitHandler.bind(this);
       this.emailOnChangeHandler = this.emailOnChangeHandler.bind(this);
       this.passwordOnChangeHandler = this.passwordOnChangeHandler.bind(this);
@@ -17,6 +17,7 @@ constructor(props){
       this.locationOnChangeHandler = this.locationOnChangeHandler.bind(this);
       this.occupationOnChangeHandler = this.occupationOnChangeHandler.bind(this);
       this.loadkeywords=this.loadkeywords.bind(this);
+      this.pinCodeOnChangeHandler=this.pinCodeOnChangeHandler.bind(this);
 
 };
   
@@ -74,6 +75,9 @@ occupationOnChangeHandler(event){
 passwordOnChangeHandler(event){
     this.setState({password: event.target.value});
 }
+pinCodeOnChangeHandler(event){
+    this.setState({pinCode: event.target.value});
+}
 //manages registration and firestore 
 submitHandler(event){
 document.getElementById('registerSubmitButton1').innerHTML="Loading...";
@@ -87,6 +91,7 @@ firebase.auth()
     phone:this.state.phone,
     location:this.state.location,
     occupation:this.state.occupation,
+    pincode:this.state.pinCode,
     uid:response.user.uid
     }).then((result=>{
          console.log("result : "+result);
@@ -148,6 +153,10 @@ render(){
                 <div className="form-group">
                     <label>Location</label>
                     <input type="text" value={this.state.location} className="form-control" placeholder="Enter city, district or town" onChange={this.locationOnChangeHandler} />
+                </div>
+                <div className="form-group">
+                    <label>PinCode</label>
+                    <input type="text" value={this.state.pinCode} className="form-control" placeholder="Enter PinCode" onChange={this.pinCodeOnChangeHandler} />
                 </div>
                 <div className="form-grou">
                     <label>Occupation</label> <br></br>

@@ -36,6 +36,7 @@ class ServiceProviderProfile extends Component {
     this.locationHandler=this.locationHandler.bind(this);
     this.mobileHandler=this.mobileHandler.bind(this);
     this.occupationHandler=this.occupationHandler.bind(this);
+    this.pinCodeHandler=this.pinCodeHandler.bind(this);
   }
 
   async componentDidMount() {
@@ -54,6 +55,7 @@ class ServiceProviderProfile extends Component {
         phone:this.state.userInfo.phone,
         location:this.state.userInfo.location,
         occupation :this.state.userInfo.occupation,
+        pincode:this.state.userInfo.pincode
 
         
       }
@@ -68,6 +70,7 @@ class ServiceProviderProfile extends Component {
         phone:this.state.userInfo.phone,
         location:this.state.userInfo.location,
         occupation :this.state.userInfo.occupation,
+        pincode:this.state.userInfo.pincode
       }
     });
   }
@@ -79,6 +82,7 @@ class ServiceProviderProfile extends Component {
         email:this.state.userInfo.email,
         phone:this.state.userInfo.phone,
         occupation :this.state.userInfo.occupation,
+        pincode:this.state.userInfo.pincode
       }
     });
   }
@@ -90,6 +94,7 @@ class ServiceProviderProfile extends Component {
         name:this.state.userInfo.name,
         email:this.state.userInfo.email,
         location:this.state.userInfo.location,
+        pincode:this.state.userInfo.pincode
       }
     });
   }
@@ -101,6 +106,19 @@ class ServiceProviderProfile extends Component {
         email:this.state.userInfo.email,
         location:this.state.userInfo.location,
         phone:this.state.userInfo.phone,
+        pincode:this.state.userInfo.pincode,
+      }
+    });
+  }
+  pinCodeHandler(event){
+    this.setState({
+      userInfo:{
+        pincode:event.target.value,
+        name:this.state.userInfo.name,
+        email:this.state.userInfo.email,
+        location:this.state.userInfo.location,
+        phone:this.state.userInfo.phone,
+        occupation :this.state.userInfo.occupation,
       }
     });
   }
@@ -173,7 +191,8 @@ async loadUserReview(){
                 amount: doc.data().amount,
                 stars: doc.data().stars,
                 review:doc.data().review,
-                userID:doc.data().userID
+                userID:doc.data().userID,
+                date:doc.data().date,
               };
               array1.push(review);
               // this.state.providers.push(provider)
@@ -229,6 +248,7 @@ async loadUserReview(){
           email:this.state.userInfo.email,
           location:this.state.userInfo.location,
           phone:this.state.userInfo.phone,
+          pincode:this.state.userInfo.pincode
 
       })
       .then((query)=>{
@@ -307,6 +327,13 @@ addReviewButton(){
                 <input id="formLocation" type="text"  onChange={this.locationHandler} value={this.state.userInfo.location}/>
                 :
                 <input id="formLocation" type="text" readOnly onChange={this.locationHandler} value={this.state.userInfo.location}/>
+            }
+            <br></br><br></br>
+            <label>PinCode </label> <br></br>
+            {this.state.editable ?
+                <input id="formLocation" type="text"  onChange={this.pinCodeHandler} value={this.state.userInfo.pincode}/>
+                :
+                <input id="formLocation" type="text" readOnly onChange={this.pinCodeHandler} value={this.state.userInfo.pincode}/>
             }
             <br></br><br></br>
 

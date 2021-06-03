@@ -23,7 +23,7 @@ export const Preview = ({ review }) => {
         <p>{review.review}</p>
       </p>
       <div id="sender">
-       
+            Date - {review.date} <br></br>
             Review by - <a href={userid}><u>{review.userID}</u></a>
        
       </div>

@@ -8,11 +8,12 @@ import "../components_css/explore.css";
 class Explore extends Component {
   constructor(props) {
     super(props);
-    this.state = { occupation: "", keywords: "", providers: [], found: 1 };
+    this.state = { occupation: "", keywords: "", providers: [], found: 1 ,pinCode:''};
 
     this.loadkeywords = this.loadkeywords.bind(this);
     this.occupationOnChangeHandler = this.occupationOnChangeHandler.bind(this);
     this.go = this.go.bind(this);
+    this.pinCodeHandler= this.pinCodeHandler.bind(this);
   }
 
   async componentWillMount() {
@@ -49,16 +50,20 @@ class Explore extends Component {
     this.setState({ occupation: event.target.value });
     console.log(this.state.occupation);
   }
+  pinCodeHandler(event) {
+    this.setState({ pinCode: event.target.value });
+    
+  }
 
   go() {
-    if (this.state.occupation === "") {
-      alert("Enter in the search box!");
+    if (this.state.occupation === "" || this.state.pinCode==="" || this.state.pinCode.length!=6) {
+      alert("Please Provide Valid deatils !");
     } else {
       console.log(this.state.occupation);
       firebase
         .firestore()
         .collection("serviceProviders")
-        .where("occupation", "==", this.state.occupation.toLowerCase())
+        .where("occupation", "==", this.state.occupation.toLowerCase()).where("pincode","==",this.state.pinCode)
         .get()
         .then((snapshot) => {
           console.log("exce");
@@ -99,7 +104,7 @@ class Explore extends Component {
         <div className="form">
           <form>
             <input
-              list="occupation"
+              list="occupation" placeholder="Enter Occupation"
               value={this.state.occupation}
               onChange={this.occupationOnChangeHandler}
             />
@@ -107,7 +112,8 @@ class Explore extends Component {
               {this.state.keywords.map((t) => (
                 <option key={t.key} value={t.item} />
               ))}
-            </datalist>
+            </datalist><br></br><br></br>
+            <input type="text" placeholder="Enter Pincode" onChange={this.pinCodeHandler}></input>
           </form>
           <button className="Search" onClick={this.go}>
             <i class="fas fa-search fa-2x"></i>
