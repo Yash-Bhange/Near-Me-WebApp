@@ -295,9 +295,7 @@ addReviewButton(){
     
     return (
       
-
-
-      <div>
+            <div id="back">
          <div id="accountHeader">
            <h3>Account Information</h3>
          </div>
@@ -305,7 +303,7 @@ addReviewButton(){
 
         <div id="profileDiv">
           <form>
-            <label>Name </label> <br></br>
+            <label id="x1">Name </label> <br></br>
             {this.state.editable ?
                 <input id="formName" type="text"  onChange={this.nameHandler} value={this.state.userInfo.name}/>
                 :
@@ -313,7 +311,7 @@ addReviewButton(){
             }
             <br></br><br></br>
             
-            <label>Email </label> <br></br>
+            <label id="x1">Email </label> <br></br>
             {this.state.editable ?
                 <input id="formEmail" type="text"  onChange={this.emailHandler} value={this.state.userInfo.email}/>
                 :
@@ -322,14 +320,14 @@ addReviewButton(){
             <br></br><br></br>
 
             
-            <label>Location </label> <br></br>
+            <label id="x1">Location </label> <br></br>
             {this.state.editable ?
                 <input id="formLocation" type="text"  onChange={this.locationHandler} value={this.state.userInfo.location}/>
                 :
                 <input id="formLocation" type="text" readOnly onChange={this.locationHandler} value={this.state.userInfo.location}/>
             }
             <br></br><br></br>
-            <label>PinCode </label> <br></br>
+            <label id="x1">PinCode </label> <br></br>
             {this.state.editable ?
                 <input id="formLocation" type="text"  onChange={this.pinCodeHandler} value={this.state.userInfo.pincode}/>
                 :
@@ -337,7 +335,7 @@ addReviewButton(){
             }
             <br></br><br></br>
 
-            <label>Mobile</label> <br></br>
+            <label id="x1">Mobile</label> <br></br>
             {this.state.editable ?
                 <input id="formPhone" type="text"  onChange={this.mobileHandler} value={this.state.userInfo.phone}/>
                 :
@@ -345,7 +343,7 @@ addReviewButton(){
             }
             <br></br><br></br>
 
-            <label>Occupation </label> <br></br>
+            <label id="x1">Occupation </label> <br></br>
             {this.state.editable ?
                  <input id="formOccupation" type="text" onChange={this.occupationHandler} value={this.state.userInfo.occupation}/> 
                 :
@@ -376,7 +374,7 @@ addReviewButton(){
         <hr></hr>
         <div id="profileReview">
             <div id="profileReviewHeader">
-                  <h3>Previous Work</h3>
+                  <h3 id="heading">Previous Work</h3>
             </div>
             <br></br>
             <div id="reviewCards">
