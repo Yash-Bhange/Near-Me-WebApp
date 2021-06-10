@@ -100,20 +100,21 @@ render(){
             
                 <div className="form" id="main2">
                     <label class="field2" >Name</label>
-                    <input id="name" type="text" value={this.state.name} className="form-control" placeholder="Enter name" onChange={this.nameOnChangeHandler} />
+                    <input id="name" class="registerInputFeild" type="text" value={this.state.name}  placeholder="Enter name" onChange={this.nameOnChangeHandler} />
                 
                 
                     <label class="field2">Email address</label>
-                    <input id="email" type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
+                    <input id="email"  class="registerInputFeild" type="email" value={this.state.email}  placeholder="Enter email" onChange={this.emailOnChangeHandler} />
                
 
                     <label class="field2">Password</label>
-                    <input id="pass" type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
+                    <input id="pass" class="registerInputFeild" type="password" value={this.state.password}  placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
+                  <div id="registerButton">
+                  <a id="registerSubmitButton"  className="btn btn-primary" onClick={this.submitHandler} >Submit</a>
 
-                <a id="registerSubmitButton"  className="btn btn-primary" onClick={this.submitHandler} >Submit</a>
-                <p className="forgot-password text-right">
-                    
-                </p>
+                  </div>
+        
+                
                 </div>
             </form>
       </div>

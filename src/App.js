@@ -70,7 +70,7 @@ class App extends Component {
           <div>
             <ul class="main-navigation">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/home">Home</Link>
               </li>
               <li>
                 <Link to="/explore">Find</Link>
@@ -162,7 +162,9 @@ class App extends Component {
               exact
               component={() => <Review />}
             />
+            <Redirect to="/home" />
           </Switch>
+          
         </div>
       </BrowserRouter>
       
@@ -194,7 +196,7 @@ class App extends Component {
  
  <div>
  <i class="fa fa-envelope"></i>
- <p><a href="mailto:support@company.com">yashbhange888@gmail.com</a></p>
+ <p><a href="mailto:yashbhange888@gmail.com">yashbhange888@gmail.com</a></p>
  </div>
  
  </div>
@@ -203,7 +205,7 @@ class App extends Component {
  
  <p class="footer-company-about">
  <span>About the company</span>
- 'Naer-Me' Multi-Sevice App is an aggregator with IT-based digital platform which aims to find win-win businnes opportunities for both th multi service app service and the service providers on an online platform.
+ 'Near-Me' Multi-Sevice App is an aggregator with IT-based digital platform which aims to find win-win businnes opportunities for both th multi service app service and the service providers on an online platform.
  </p>
  
  <div class="footer-icons">

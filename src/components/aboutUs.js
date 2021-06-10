@@ -30,9 +30,10 @@ render(){
           <div> 
                 
 <div class="about-section">
-  <h1>About Us Page</h1>
-  <p>Some text about who we are and what we do.</p>
-  <p>Resize the browser window to see that this page is responsive by the way.</p>
+  <h1>About Us </h1>
+  <p>'Near-Me' Multi-Sevice App is an aggregator with IT-based digital platform which aims<br></br> to find win-win businnes opportunities for both th multi service app service and the service providers on an online platform.
+</p>
+  
 </div>
 
 <h2 id="ourteam">Our Team</h2>
@@ -43,9 +44,9 @@ render(){
       <div class="container">
         <h2>Yash Bhange</h2>
         <p class="title">Developer</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Batch : T-8 <br></br>PRN : 2018BTECS00109</p>
         <p>yashbhange888@gmail.com</p>
-        <p><button class="button">Contact</button></p>
+        <a href="mailto:yashbhange888@gmail.com"><button class="button">Contact</button></a>
       </div>
     </div>
   </div>
@@ -56,9 +57,9 @@ render(){
       <div class="container">
         <h2>Tavishi Suvarna</h2>
         <p class="title">Developer</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Batch : T-8 <br></br>PRN : 2018BTECS00114</p>
         <p>suvarnatavishi7@gmail.com</p>
-        <p><button class="button">Contact</button></p>
+        <a href="mailto:yashbhange888@gmail.com"><button class="button">Contact</button></a>
       </div>
     </div>
   </div>
@@ -69,9 +70,9 @@ render(){
       <div class="container">
         <h2>Prakash Singh</h2>
         <p class="title">Developer</p>
-        <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+        <p>Batch : T-8 <br></br>PRN : 2018BTECS00100</p>
         <p>prakx@gmail.com</p>
-        <p><button class="button">Contact</button></p>
+        <a href="mailto:yashbhange888@gmail.com"><button class="button">Contact</button></a>
       </div>
     </div>
   </div>

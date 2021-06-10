@@ -129,6 +129,7 @@ render(){
              <form id="login">
                
                 <div id="main1" >
+                    <br></br>
                     <label class="field">Email address</label>
                     <input id="title" type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
                 

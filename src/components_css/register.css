@@ -45,3 +45,13 @@
     margin-top: 10px;
     width: 200px;
 }
+.registerInputFeild{
+  width:300%;
+}
+#registerSubmitButton{
+  text-align: center;
+  
+}
+#registerButton{
+  margin-left: 250%;
+}
