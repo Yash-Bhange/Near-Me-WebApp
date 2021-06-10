@@ -1,0 +1,47 @@
+#main2{
+    width: 100%;
+    margin-left: 25px;
+    margin-top: 30px;
+    width: 125px;
+    color: white;
+    font-size: 18px;
+    font-weight: 700px;
+}
+
+#reg{
+    min-height: 200px;
+    background-color: rgb(255, 255, 255,0.5);
+    width: 800px;
+    margin: auto;
+    height: 330px;
+    border-radius:  0px 0px 15px 15px;
+  }
+
+#name,#email,#pass{
+    margin-top: 5px;
+    position: relative;
+    left: 200px;
+    top: -37px;
+    line-height: 40px;
+    border-radius: 6px;
+    padding: 0 22px;
+    font-size: 16px;
+
+}
+
+#admin{
+    min-height: 200px;
+    background-color: rgb(255, 255, 255,0.5);
+    width: 800px;
+    margin: auto;
+    height: 720px;
+    border-radius:  0px 0px 15px 15px;
+  }
+
+  .field2{
+    font-size: 20px;
+    font-weight: 4px;
+    position: relative;
+    margin-top: 10px;
+    width: 200px;
+}
