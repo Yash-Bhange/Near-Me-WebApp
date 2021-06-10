@@ -1,5 +1,6 @@
 import React ,{Component} from 'react';
-import '../components_css/login.css'
+import '../components_css/login.css';
+import '../components_css/register.css';
 import firebase from '../helper/firebase'
 
 
@@ -89,29 +90,33 @@ firebase.auth()
 render(){
              
       return (
-      <div>
-             <form>
-                <h3>Register</h3>
-                <div className="form-group">
-                    <label>Name</label>
-                    <input type="text" value={this.state.name} className="form-control" placeholder="Enter name" onChange={this.nameOnChangeHandler} />
-                </div>
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
-                </div>
+                  <div id="back-ground-span1">
+          <div id="topSpace">
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
-                </div>
+          </div>
+          <div><p id="title-form">REGISTER</p> </div>  
+        <div id="reg">
+             <form id="register">
+            
+                <div className="form" id="main2">
+                    <label class="field2" >Name</label>
+                    <input id="name" type="text" value={this.state.name} className="form-control" placeholder="Enter name" onChange={this.nameOnChangeHandler} />
+                
+                
+                    <label class="field2">Email address</label>
+                    <input id="email" type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
+               
 
+                    <label class="field2">Password</label>
+                    <input id="pass" type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
 
-                <a id="registerSubmitButton"  className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
+                <a id="registerSubmitButton"  className="btn btn-primary" onClick={this.submitHandler} >Submit</a>
                 <p className="forgot-password text-right">
-                   
+                    
                 </p>
+                </div>
             </form>
+      </div>
       </div>
             );
   
