@@ -6,7 +6,24 @@
 }
 #accountHeader{
   text-align: center;
+  color: white;
 }
 #profileReviewHeader{
   text-align: center;
+  color: white;
+}
+
+#back{
+  background-color: black;
+}
+
+#heading{
+  color: white;
+  margin-top: 100px;
+}
+
+#x1{
+  color: white;
+  font-weight: bolder;
+  font-size: 16px;
 }
