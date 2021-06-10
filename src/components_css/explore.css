@@ -79,3 +79,38 @@ form input:focus {
 .checked {
   color: orange;
 }
+
+#topSpace{
+
+  height:100px;
+
+}
+
+#back-ground-span1{
+  background-image: url(../components/bg1.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 1000px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#title-form{
+  width: 800px;
+  background-color: rgb(255, 255, 255,0.5);
+  margin: auto;
+  color: black;
+  padding: 10px 0px 10px 0px;
+  text-align: center;
+  border-radius: 15px 15px 0px 0px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+#explore_find{
+  min-height: 200px;
+  background-color: rgb(255, 255, 255,0.5);
+  width: 800px;
+  margin: auto;
+  height: 50px;
+  border-radius:  0px 0px 15px 15px;
+}
