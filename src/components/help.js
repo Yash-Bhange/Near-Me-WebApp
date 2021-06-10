@@ -73,13 +73,17 @@ document.getElementById("helpSubmitButton").innerHTML="Sending...";
 render(){
              
       return ( 
-          <div> 
+                  <div id="back-ground-span1"> 
+          <div id="topSpace">
 
-              <div id="header">
+
+          </div>
+
+              <div id="title-form">
                   <h2>We will get back to you soon !</h2>
               </div>
               <br></br><br></br>
-              <div>
+              <div id="help">
                   <form id="inputForm" >
                       
                       <input class ="helpInput" type="text" placeholder="Enter Name" value={this.state.name} required onChange={this.nameHandler}/> <br></br><br></br>
@@ -97,10 +101,6 @@ render(){
                   
                   
               </div>
-
-              
- 
-
 
           </div>
       
