@@ -100,8 +100,13 @@ class Explore extends Component {
 
   render() {
     return (
-      <div>
-        <div className="form">
+          <div id="back-ground-span1">
+        <div id="topSpace">
+
+
+        </div>
+        <div><p id="title-form">EXPLORE!!</p> </div> 
+        <div className="form" id="explore_find">
           <form>
             <input
               list="occupation" placeholder="Enter Occupation"
