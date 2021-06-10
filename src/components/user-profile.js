@@ -1,7 +1,8 @@
 import React ,{Component} from 'react';
 import {BrowserRouter,Switch,Route,Redirect} from 'react-router-dom';
 import { withRouter } from "react-router";
-import firebase from '../helper/firebase'
+import firebase from '../helper/firebase';
+import "../components_css/providerView.css";
 
 class UserProfile extends Component{  
 
@@ -164,7 +165,7 @@ async editButton(){
 render(){
              
       return (
-            <div> 
+                  <div id="back"> 
             
             
             <div id="accountHeader">
@@ -175,7 +176,7 @@ render(){
             
         <div id="profileDiv">
           <form>
-            <label>Name </label> <br></br>
+            <label id="x1">Name </label> <br></br>
             {this.state.editable ?
                 <input id="formName" type="text"  onChange={this.nameHandler} value={this.state.userInfo.name}/>
                 :
@@ -183,7 +184,7 @@ render(){
             }
             <br></br><br></br>
             
-            <label>Email </label> <br></br>
+            <label id="x1">Email </label> <br></br>
             {this.state.editable ?
                 <input id="formEmail" type="text"  onChange={this.emailHandler} value={this.state.userInfo.email}/>
                 :
