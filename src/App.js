@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route, Redirect, Link } from "react-router-dom";
 import "./App.css";
-
+import Home from "./components/home";
 import Login from "./components/login.js";
 import Register from "./components/register.js";
 import RegisterAdmin from "./components/registerAdmin.js";
@@ -119,6 +119,7 @@ class App extends Component {
           </div>
 
           <Switch>
+            <Route exact path="/home" component={()=><Home/>} />
             <Route exact path="/login" component={() => <Login />} />
             <Route exact path="/register" component={() => <Register />} />
             <Route
