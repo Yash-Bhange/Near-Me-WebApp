@@ -135,48 +135,60 @@ firebase.auth()
 render(){
              
       return (
-                  <div id="back-ground-span1">
-          <div id="topSpace">
+        <div>
+          
+             <form>
+                 <h3>REGISTER AS SERVICE PROVIDER</h3><br></br>
+                
 
-          </div>
-          <div><p id="title-form">REGISTER AS SERVICE PROVIDER</p> </div> 
-        <div id="admin">
-             <form id="register">
-                <div className="form" id="main2">
-                    <label class="field2">Name</label>
-                    <input id="name" type="text" value={this.state.name} className="form-control" placeholder="Enter name" onChange={this.nameOnChangeHandler} />
-             
-                    <label class="field2">Email address</label>
-                    <input id="email" type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
-                
-                    <label class="field2">Contact Number</label>
-                    <input id="name" type="text" value={this.state.phone} className="form-control" placeholder="Enter mobile number" onChange={this.phoneOnChangeHandler} />
-                
-                    <label class="field2">Location</label>
-                    <input id="name" type="text" value={this.state.location} className="form-control" placeholder="Enter city, district or town" onChange={this.locationOnChangeHandler} />
-               
-                    <label class="field2">PinCode</label>
-                    <input id="name" type="text" value={this.state.pinCode} className="form-control" placeholder="Enter PinCode" onChange={this.pinCodeOnChangeHandler} />
-             
-                    <label class="field2">Occupation</label> <br></br>
-                    <input id="name" list="brow"  onChange={this.occupationOnChangeHandler}/>
+                 <div className="form-group"> 
+                    <label >Name</label>
+                    <input  type="text" value={this.state.name} className="form-control" placeholder="Enter name" onChange={this.nameOnChangeHandler} />
+                 </div>
+
+                 <div className="form-group"> 
+                    <label >Email address</label>
+                    <input type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
+                 </div>
+
+                 <div className="form-group"> 
+                    <label >Contact Number</label>
+                    <input  type="text" value={this.state.phone} className="form-control" placeholder="Enter mobile number" onChange={this.phoneOnChangeHandler} />
+                 </div>
+
+                 <div className="form-group"> 
+                    <label >Location</label>
+                    <input  type="text" value={this.state.location} className="form-control" placeholder="Enter city, district or town" onChange={this.locationOnChangeHandler} />
+                 </div>
+
+                 <div className="form-group">
+                    <label >PinCode</label>
+                    <input  type="text" value={this.state.pinCode} className="form-control" placeholder="Enter PinCode" onChange={this.pinCodeOnChangeHandler} />
+                 </div>
+ 
+                 <div className="form-group">
+
+                    <label >Occupation</label> <br></br>
+                    <input  list="brow"  onChange={this.occupationOnChangeHandler}/>
                     <datalist id="brow" >
                         {this.state.keywords.map((t) =>
                         <option key={t.key} value={t.item} />
                         )}
                     </datalist>
+                </div>
                     
-                
-
-                    <label class="field2">Password</label>
-                    <input id="pass" type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
+                <div className="form-group">
+               
+                    <label>Password</label>
+                    <input  type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
+                </div>
 
                 <br></br>
 
-                <a id="registerSubmitButton1" className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
-                </div>
+                   <a id="registerSubmitButton1" className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
+             
             </form>
-      </div>
+     
       </div>
             );
   

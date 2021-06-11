@@ -90,35 +90,40 @@ firebase.auth()
 render(){
              
       return (
-                  <div id="back-ground-span1">
-          <div id="topSpace">
-
-          </div>
-          <div><p id="title-form">REGISTER</p> </div>  
-        <div id="reg">
-             <form id="register">
+                 
+          
+         
+        <div>
+             <form >
+                 <h3>REGISTER</h3>
             
-                <div className="form" id="main2">
-                    <label class="field2" >Name</label>
-                    <input id="name" class="registerInputFeild" type="text" value={this.state.name}  placeholder="Enter name" onChange={this.nameOnChangeHandler} />
+             <div className="form-group">
+                    <label >Name</label>
+                    <input  className="form-control"  type="text" value={this.state.name}  placeholder="Enter name" onChange={this.nameOnChangeHandler} />
+            </div>
                 
-                
-                    <label class="field2">Email address</label>
-                    <input id="email"  class="registerInputFeild" type="email" value={this.state.email}  placeholder="Enter email" onChange={this.emailOnChangeHandler} />
-               
+            <div className="form-group">
+                    <label >Email address</label>
+                    <input  className="form-control"   type="email" value={this.state.email}  placeholder="Enter email" onChange={this.emailOnChangeHandler} />
+            </div>
 
-                    <label class="field2">Password</label>
-                    <input id="pass" class="registerInputFeild" type="password" value={this.state.password}  placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
-                  <div id="registerButton">
-                  <a id="registerSubmitButton"  className="btn btn-primary" onClick={this.submitHandler} >Submit</a>
+            <div className="form-group">
+            <label >Password</label>
+                    <input  className="form-control"  type="password" value={this.state.password}  placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
+
+            </div>
+
+                    
+                  <div>
+                  <a id="registerSubmitButton"  className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
 
                   </div>
         
                 
-                </div>
+                
             </form>
       </div>
-      </div>
+      
             );
   
 }

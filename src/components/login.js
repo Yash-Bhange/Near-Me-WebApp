@@ -120,39 +120,39 @@ firebase.auth()
 render(){
              
       return (
-                 <div id="back-ground-span1">
-          <div id="topSpace">
-
-          </div>
-          <div><p id="title-form">SIGN IN</p> </div>
-          <div id="reg">
-             <form id="login">
+                 <div >
+          
+          
+          
+             <form >
+                 <h3>SIGN IN </h3><br></br>
                
-                <div id="main1" >
-                    <br></br>
-                    <label class="field">Email address</label>
-                    <input id="title" type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
-                
-
+             <div className="form-group">
+                    <label >Email address</label>
+                    <input  type="email" value={this.state.email} className="form-control" placeholder="Enter email" onChange={this.emailOnChangeHandler} />
+              </div>
+             
+              <div className="form-group">
                
-                    <label class="field">Password</label>
-                    <input id="title" type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
-                
+                    <label>Password</label>
+                    <input  type="password" value={this.state.password} className="form-control" placeholder="Enter password" onChange={this.passwordOnChangeHandler} />
+              </div>
 
-              
-                    <div className="custom-control custom-checkbox">
+              <div className="form-group">
+              <div className="custom-control custom-checkbox">
                         <input type="checkbox" checked={this.state.isProvider} onChange={this.checkboxChangeHandler} className="custom-control-input" id="customCheck1" />
                         <label className="custom-control-label" htmlFor="customCheck1">I'm a service provider</label>
                     </div>
-                
+              </div>
 
-                <a id="loginSubmitButton" className="btn btn-primary" onClick={this.submitHandler} >Submit</a>
+  
+                <a id="loginSubmitButton" className="btn btn-primary btn-block" onClick={this.submitHandler} >Submit</a>
                 <p className="forgot-password text-right">
                    Don't have account ? <a href="/register">Register here</a>
                 </p>
-                </div>
+                
             </form>
-            </div> 
+            
       </div> 
       );
   
