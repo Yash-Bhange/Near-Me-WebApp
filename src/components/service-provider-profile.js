@@ -37,6 +37,7 @@ class ServiceProviderProfile extends Component {
     this.mobileHandler=this.mobileHandler.bind(this);
     this.occupationHandler=this.occupationHandler.bind(this);
     this.pinCodeHandler=this.pinCodeHandler.bind(this);
+    this.sortButton=this.sortButton.bind(this);
   }
 
   async componentDidMount() {
@@ -290,6 +291,24 @@ addReviewButton(){
 
 
 
+async sortButton(e){
+
+
+  
+
+  const sorted = this.state.workReviews.sort((a, b) => Number(b['stars']) - Number(a['stars']));
+
+  console.log(sorted);
+  this.setState({
+    workReviews:sorted
+  });
+
+
+
+}
+
+
+
   render() {
 
     
@@ -363,11 +382,18 @@ addReviewButton(){
           &emsp; &emsp;
           {
             this.state.userid!=(this.props.match.params.ID) && this.state.isProvider!=true?
-            <button onClick={this.addReviewButton} id="addReviewButton">Add Review </button>
+            <button onClick={this.addReviewButton} id="addReviewButton" className="btn-primary ">Add Review<br></br><span id="razorpayButtontext">Visible to all users</span> </button>
             :
             <span></span>
 
           }
+           &emsp; &emsp;
+           
+          <a target="_blank" href="https://pages.razorpay.com/pl_HM6OLew1sO2kDi/view"> <button id="razorpayButton" className="btn-primary" >Pay<br></br><span id="razorpayButtontext">Powered by Razorpay</span></button></a>
+          
+
+          
+          
            
 
         </div>
@@ -375,6 +401,8 @@ addReviewButton(){
         <div id="profileReview">
             <div id="profileReviewHeader">
                   <h3 id="heading">Previous Work</h3>
+                  <button onClick={this.sortButton} id="sortButton" className="btn-primary ">sort by rating</button>
+                  <br></br><br></br>
             </div>
             <br></br>
             <div id="reviewCards">
@@ -383,6 +411,7 @@ addReviewButton(){
             this.state.found == false
             ? <div id="profileReviewHeader">
                    <h6>No Previous Work available !</h6>
+
               </div>
             :
             

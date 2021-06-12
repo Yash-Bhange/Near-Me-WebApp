@@ -16,7 +16,7 @@ export const Preview = ({ review }) => {
       <p className="title">
         <i class="fas fa-dollar-sign"> </i> {review.amount}
       </p>
-      <p className="title">{review.stars}/5</p>
+      <p className="title">{review.stars}/10</p>
       <p>
         
         <b>REVIEW</b><br></br>

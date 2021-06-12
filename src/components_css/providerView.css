@@ -27,3 +27,22 @@
   font-weight: bolder;
   font-size: 16px;
 }
+
+#razorpayButton{
+  width: 10%;
+  margin: auto;
+}
+#razorpayButtontext{
+  font-size: x-small;
+ 
+}
+#addReviewButton{
+  width: 10%;
+  margin: auto;
+
+  
+}
+#sortButton{
+  width: 10%;
+  float: right;
+}

@@ -124,7 +124,7 @@ render(){
                 </div>
                 <div className="form-group">
                     <label>Stars</label>
-                    <input type="number" value={this.state.star} required  className="form-control" placeholder="Enter star (0-5)" min="0" max="5" onChange={this.starOnChangeHandler} />
+                    <input type="number" value={this.state.star} required  className="form-control" placeholder="Enter star (0-10)" min="0" max="10" onChange={this.starOnChangeHandler} />
                 </div>
 
             </form>
