@@ -11,7 +11,6 @@ form input {
   width: 30%;
   padding: 5px;
   padding-top: 10px;
-  
 }
 form input:focus {
   border: none;
@@ -19,7 +18,7 @@ form input:focus {
   background-color: #ffffff;
 }
 .Search {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   border: none;
   background-color: #ffffff;
 }
@@ -34,6 +33,11 @@ form input:focus {
   row-gap: 2rem;
 }
 
+.results p {
+  color: white;
+  font: large;
+  text-align: center;
+}
 .prodvidercard {
   box-sizing: border-box;
   max-width: 100%;
@@ -80,23 +84,22 @@ form input:focus {
   color: orange;
 }
 
-#topSpace{
-
-  height:100px;
-
+#topSpace {
+  height: 100px;
 }
 
-#back-ground-span1{
+#back-ground-span1 {
   background-image: url(../components/bg1.jpg);
   background-position: center;
   background-size: cover;
   height: 1000px;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
-#title-form{
+#title-form {
   width: 800px;
-  background-color: rgb(255, 255, 255,0.5);
+  background-color: rgb(255, 255, 255, 0.5);
   margin: auto;
   color: black;
   padding: 10px 0px 10px 0px;
@@ -106,11 +109,11 @@ form input:focus {
   font-weight: bolder;
 }
 
-#explore_find{
+#explore_find {
   min-height: 200px;
-  background-color: rgb(255, 255, 255,0.5);
+  background-color: rgb(255, 255, 255, 0.5);
   width: 800px;
   margin: auto;
   height: 50px;
-  border-radius:  0px 0px 15px 15px;
+  border-radius: 0px 0px 15px 15px;
 }

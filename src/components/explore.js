@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DataListInput from "react-plain-datalist-input";
+import axios from "axios";
 
 import firebase from "../helper/firebase";
 import { Result } from "./Result";
@@ -13,16 +14,17 @@ class Explore extends Component {
       keywords: "",
       providers: [],
       found: 1,
-      pinCode: "",
       longitude: null,
       latitude: null,
+      city: "",
     };
 
     this.loadkeywords = this.loadkeywords.bind(this);
     this.occupationOnChangeHandler = this.occupationOnChangeHandler.bind(this);
     this.go = this.go.bind(this);
-    this.pinCodeHandler = this.pinCodeHandler.bind(this);
     this.getLocation = this.getLocation.bind(this);
+    this.getCordinates = this.getCordinates.bind(this);
+    this.getCity = this.getCity.bind(this);
   }
 
   async componentWillMount() {
@@ -59,9 +61,6 @@ class Explore extends Component {
     this.setState({ occupation: event.target.value });
     console.log(this.state.occupation);
   }
-  pinCodeHandler(event) {
-    this.setState({ pinCode: event.target.value });
-  }
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.getCordinates);
@@ -69,27 +68,41 @@ class Explore extends Component {
       alert("Geolocation is not supported by this browser.");
     }
   }
-  getCordinates(position) {
+  async getCordinates(position) {
     // console.log(
     //   `Latitude: ${position.coords.latitude} ,Longitude: ${position.coords.longitude}`
     // );
     this.setState({ latitude: position.coords.latitude });
     this.setState({ longitude: position.coords.longitude });
+    await this.getCity();
+    console.log(this.state.city);
   }
+  async getCity() {
+    var lat = this.state.latitude;
+    var lng = this.state.longitude;
+
+    const api = axios.create({
+      baseURL: `http://api.positionstack.com/v1/reverse?access_key=ba90edb95b5567234d9e3ae0cc94f4d5&query=${lat},${lng}`,
+    });
+
+    let res = await api.get("");
+
+    this.setState({ city: res.data.data[0].locality });
+  }
+
   go() {
-    if (
-      this.state.occupation === "" ||
-      this.state.pinCode === "" ||
-      this.state.pinCode.length != 6
-    ) {
-      alert("Please Provide Valid deatils !");
+    if (this.state.occupation === "") {
+      alert("Please Provide Occupation !");
+    }
+    if (this.state.city === "") {
+      alert("Please Provide Location !");
     } else {
       console.log(this.state.occupation);
       firebase
         .firestore()
         .collection("serviceProviders")
         .where("occupation", "==", this.state.occupation.toLowerCase())
-        .where("pincode", "==", this.state.pinCode)
+        .where("location", "==", this.state.city)
         .get()
         .then((snapshot) => {
           console.log("exce");
@@ -131,7 +144,7 @@ class Explore extends Component {
         <div>
           <p id="title-form">EXPLORE!!</p>{" "}
         </div>
-        <button onClick={this.getLocation}>getLocation</button>
+
         <div className="form" id="explore_find">
           <form>
             <input
@@ -147,11 +160,17 @@ class Explore extends Component {
             </datalist>
             <br></br>
             <br></br>
-            <input
-              type="text"
-              placeholder="Enter Pincode"
-              onChange={this.pinCodeHandler}
-            ></input>
+            {this.state.city == "" ? (
+              ""
+            ) : (
+              <p>
+                <i class="fas fa-map-marked fa-2x"></i> <span></span>
+                {this.state.city}
+              </p>
+            )}
+            <button type="button" onClick={this.getLocation}>
+              Set Location
+            </button>
           </form>
           <button className="Search" onClick={this.go}>
             <i class="fas fa-search fa-2x"></i>
@@ -159,11 +178,13 @@ class Explore extends Component {
         </div>
 
         <div className="results">
-          {this.state.found == 0
-            ? "No Service Provide available"
-            : this.state.providers.map((provider) => {
-                return <Result provider={provider} />;
-              })}
+          {this.state.found == 0 ? (
+            <p>"No Service Provide available"</p>
+          ) : (
+            this.state.providers.map((provider) => {
+              return <Result provider={provider} />;
+            })
+          )}
         </div>
       </div>
     );

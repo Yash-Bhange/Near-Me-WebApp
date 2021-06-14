@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from 'axios'
-import Geocode from "react-geocode";
+import axios from "axios";
+
 import {
   BrowserRouter,
   Switch,
@@ -13,9 +13,6 @@ import firebase from "../helper/firebase";
 import "../components_css/providerView.css";
 import { Link } from "react-router-dom";
 import { Preview } from "./Preview.js";
-import geofire from "geofire-common";
-
-
 
 class ServiceProviderProfile extends Component {
   constructor(props) {
@@ -298,9 +295,8 @@ class ServiceProviderProfile extends Component {
     console.log(typeof this.state.latitude);
     this.setState({ latitude: position.coords.latitude });
     this.setState({ longitude: position.coords.longitude });
-   
 
-   await this.getCity();
+    await this.getCity();
     //console.log(a);
     // console.log("adsfadsf" + hash);
     var query = await firebase
@@ -324,24 +320,17 @@ class ServiceProviderProfile extends Component {
       });
   }
 
-
-
   async getCity() {
     var lat = this.state.latitude;
-    var lng =this.state.longitude;
-   
-    const api =axios.create({
-      baseURL:`http://api.positionstack.com/v1/reverse?access_key=ba90edb95b5567234d9e3ae0cc94f4d5&query=${lat},${lng}`
-     
-    })
+    var lng = this.state.longitude;
 
-    let res=await api.get('');
-      
+    const api = axios.create({
+      baseURL: `http://api.positionstack.com/v1/reverse?access_key=ba90edb95b5567234d9e3ae0cc94f4d5&query=${lat},${lng}`,
+    });
 
-    this.setState({city:res.data.data[0].locality})
-    
+    let res = await api.get("");
 
-
+    this.setState({ city: res.data.data[0].locality });
   }
 
   render() {
