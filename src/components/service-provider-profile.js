@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import axios from 'axios'
+import Geocode from "react-geocode";
 import {
   BrowserRouter,
   Switch,
@@ -12,6 +14,8 @@ import "../components_css/providerView.css";
 import { Link } from "react-router-dom";
 import { Preview } from "./Preview.js";
 import geofire from "geofire-common";
+
+
 
 class ServiceProviderProfile extends Component {
   constructor(props) {
@@ -294,12 +298,10 @@ class ServiceProviderProfile extends Component {
     console.log(typeof this.state.latitude);
     this.setState({ latitude: position.coords.latitude });
     this.setState({ longitude: position.coords.longitude });
-    let latitude1 = 25.360972099999998;
-    let longitude1 = 82.9731705;
-    let coordinates = [longitude1, latitude1];
+   
 
-    var a = await this.getCity(coordinates);
-    console.log(a);
+   await this.getCity();
+    //console.log(a);
     // console.log("adsfadsf" + hash);
     var query = await firebase
       .firestore()
@@ -310,7 +312,7 @@ class ServiceProviderProfile extends Component {
       .update({
         latitude: this.state.latitude,
         longitude: this.state.longitude,
-        // location: city,
+        location: this.state.city,
       })
       .then((query) => {
         alert("successfully Updated");
@@ -321,35 +323,25 @@ class ServiceProviderProfile extends Component {
         alert("err");
       });
   }
-  getCity(coordinates) {
-    var xhr = new XMLHttpRequest();
-    var lat = coordinates[1];
-    var lng = coordinates[0];
-    var city = "";
 
-    xhr.open(
-      "GET",
-      "https://us1.locationiq.com/v1/reverse.php?key=pk.9ee43fe4d55822ed019121eb4cdc6430&lat=" +
-        lat +
-        "&lon=" +
-        lng +
-        "&format=json",
-      true
-    );
-    xhr.send();
-    xhr.onreadystatechange = processRequest;
-    xhr.addEventListener("readystatechange", processRequest, false);
-    function processRequest(e) {
-      if (xhr.readyState == 4 && xhr.status == 200) {
-        var response = JSON.parse(xhr.responseText);
-        var city1 = response.address.city;
-        console.log(city1);
-        city += city1;
-        return;
-      }
-    }
-    console.log(city);
-    return city;
+
+
+  async getCity() {
+    var lat = this.state.latitude;
+    var lng =this.state.longitude;
+   
+    const api =axios.create({
+      baseURL:`http://api.positionstack.com/v1/reverse?access_key=ba90edb95b5567234d9e3ae0cc94f4d5&query=${lat},${lng}`
+     
+    })
+
+    let res=await api.get('');
+      
+
+    this.setState({city:res.data.data[0].locality})
+    
+
+
   }
 
   render() {
