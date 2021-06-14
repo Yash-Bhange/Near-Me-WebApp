@@ -10,34 +10,41 @@ import { withRouter } from "react-router";
 import firebase from "../helper/firebase";
 import "../components_css/providerView.css";
 import { Link } from "react-router-dom";
-import {Preview}  from "./Preview.js";
+import { Preview } from "./Preview.js";
+import geofire from "geofire-common";
+
 class ServiceProviderProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userInfo: {},
-      workReviews: [], 
-      found:false,
+      workReviews: [],
+      found: false,
       userid: null,
       email: null,
       isProvider: false,
-      editable :false,
-      docID:'',
-
+      editable: false,
+      docID: "",
+      latitude: null,
+      longitude: null,
+      city: "",
     };
-    
+
     this.loadUserDetails = this.loadUserDetails.bind(this);
-    this.loadUserReview=this.loadUserReview.bind(this);
-    this.editButton=this.editButton.bind(this);
-    this.addReviewButton=this.addReviewButton.bind(this);
+    this.loadUserReview = this.loadUserReview.bind(this);
+    this.editButton = this.editButton.bind(this);
+    this.addReviewButton = this.addReviewButton.bind(this);
     this.loadUser = this.loadUser.bind(this);
-    this.nameHandler=this.nameHandler.bind(this);
-    this.emailHandler=this.emailHandler.bind(this);
-    this.locationHandler=this.locationHandler.bind(this);
-    this.mobileHandler=this.mobileHandler.bind(this);
-    this.occupationHandler=this.occupationHandler.bind(this);
-    this.pinCodeHandler=this.pinCodeHandler.bind(this);
-    this.sortButton=this.sortButton.bind(this);
+    this.nameHandler = this.nameHandler.bind(this);
+    this.emailHandler = this.emailHandler.bind(this);
+    this.locationHandler = this.locationHandler.bind(this);
+    this.mobileHandler = this.mobileHandler.bind(this);
+    this.occupationHandler = this.occupationHandler.bind(this);
+    this.pinCodeHandler = this.pinCodeHandler.bind(this);
+    this.sortButton = this.sortButton.bind(this);
+    this.resetLocation = this.resetLocation.bind(this);
+    this.getLocation = this.getLocation.bind(this);
+    this.getCity = this.getCity.bind(this);
   }
 
   async componentDidMount() {
@@ -46,86 +53,80 @@ class ServiceProviderProfile extends Component {
     await this.loadUser();
   }
 
-
-
-  nameHandler(event){
+  nameHandler(event) {
     this.setState({
-      userInfo:{
-        name:event.target.value,
-        email:this.state.userInfo.email,
-        phone:this.state.userInfo.phone,
-        location:this.state.userInfo.location,
-        occupation :this.state.userInfo.occupation,
-        pincode:this.state.userInfo.pincode
-
-        
-      }
-    });
-  
-  }
-  emailHandler(event){
-    this.setState({
-      userInfo:{
-        name:this.state.userInfo.name,
-        email:event.target.value,
-        phone:this.state.userInfo.phone,
-        location:this.state.userInfo.location,
-        occupation :this.state.userInfo.occupation,
-        pincode:this.state.userInfo.pincode
-      }
+      userInfo: {
+        name: event.target.value,
+        email: this.state.userInfo.email,
+        phone: this.state.userInfo.phone,
+        location: this.state.userInfo.location,
+        occupation: this.state.userInfo.occupation,
+        pincode: this.state.userInfo.pincode,
+      },
     });
   }
-  locationHandler(event){
+  emailHandler(event) {
     this.setState({
-      userInfo:{
-        location:event.target.value,
-        name:this.state.userInfo.name,
-        email:this.state.userInfo.email,
-        phone:this.state.userInfo.phone,
-        occupation :this.state.userInfo.occupation,
-        pincode:this.state.userInfo.pincode
-      }
+      userInfo: {
+        name: this.state.userInfo.name,
+        email: event.target.value,
+        phone: this.state.userInfo.phone,
+        location: this.state.userInfo.location,
+        occupation: this.state.userInfo.occupation,
+        pincode: this.state.userInfo.pincode,
+      },
     });
   }
-  mobileHandler(event){
+  locationHandler(event) {
     this.setState({
-      userInfo:{
-        phone:event.target.value,
-        occupation :this.state.userInfo.occupation,
-        name:this.state.userInfo.name,
-        email:this.state.userInfo.email,
-        location:this.state.userInfo.location,
-        pincode:this.state.userInfo.pincode
-      }
+      userInfo: {
+        location: event.target.value,
+        name: this.state.userInfo.name,
+        email: this.state.userInfo.email,
+        phone: this.state.userInfo.phone,
+        occupation: this.state.userInfo.occupation,
+        pincode: this.state.userInfo.pincode,
+      },
     });
   }
-  occupationHandler(event){
+  mobileHandler(event) {
     this.setState({
-      userInfo:{
-        occupation:event.target.value,
-        name:this.state.userInfo.name,
-        email:this.state.userInfo.email,
-        location:this.state.userInfo.location,
-        phone:this.state.userInfo.phone,
-        pincode:this.state.userInfo.pincode,
-      }
+      userInfo: {
+        phone: event.target.value,
+        occupation: this.state.userInfo.occupation,
+        name: this.state.userInfo.name,
+        email: this.state.userInfo.email,
+        location: this.state.userInfo.location,
+        pincode: this.state.userInfo.pincode,
+      },
     });
   }
-  pinCodeHandler(event){
+  occupationHandler(event) {
     this.setState({
-      userInfo:{
-        pincode:event.target.value,
-        name:this.state.userInfo.name,
-        email:this.state.userInfo.email,
-        location:this.state.userInfo.location,
-        phone:this.state.userInfo.phone,
-        occupation :this.state.userInfo.occupation,
-      }
+      userInfo: {
+        occupation: event.target.value,
+        name: this.state.userInfo.name,
+        email: this.state.userInfo.email,
+        location: this.state.userInfo.location,
+        phone: this.state.userInfo.phone,
+        pincode: this.state.userInfo.pincode,
+      },
+    });
+  }
+  pinCodeHandler(event) {
+    this.setState({
+      userInfo: {
+        pincode: event.target.value,
+        name: this.state.userInfo.name,
+        email: this.state.userInfo.email,
+        location: this.state.userInfo.location,
+        phone: this.state.userInfo.phone,
+        occupation: this.state.userInfo.occupation,
+      },
     });
   }
 
-
-async loadUserDetails() {
+  async loadUserDetails() {
     console.log(this.props);
     firebase
       .firestore()
@@ -135,302 +136,416 @@ async loadUserDetails() {
       .then((snapshot) => {
         let localUser;
         let docid;
-         //console.log(snapshot.docs);
+        //console.log(snapshot.docs);
         snapshot.docs.forEach(function (doc) {
           localUser = doc.data();
           console.log(doc.id); //document Id needed to update ddocument
-          docid=doc.id;
-          
+          docid = doc.id;
         });
-        this.setState({docID:docid})
+        this.setState({ docID: docid });
         this.setState({ userInfo: localUser });
-        console.log(this.state.userInfo);
+        // console.log(this.state.userInfo);
       })
       .catch((err) => {
         console.log("error : " + err);
       });
-}
-
-
-async loadUser() {
-  const user = localStorage.getItem("user");
-  const loggedInUser = user != null ? JSON.parse(user) : null;
-  if (loggedInUser == null) {
-    window.location.href = "/login";
-  } else {
-    this.setState({
-      email: loggedInUser.email,
-      isProvider: loggedInUser.isProvider,
-      userid: loggedInUser.userid,
-    });
   }
-}
 
-async loadUserReview(){
-  firebase
+  async loadUser() {
+    const user = localStorage.getItem("user");
+    const loggedInUser = user != null ? JSON.parse(user) : null;
+    if (loggedInUser == null) {
+      window.location.href = "/login";
+    } else {
+      this.setState({
+        email: loggedInUser.email,
+        isProvider: loggedInUser.isProvider,
+        userid: loggedInUser.userid,
+      });
+    }
+  }
+
+  async loadUserReview() {
+    firebase
       .firestore()
       .collection("reviews")
       .where("serviceProviderID", "==", String(this.props.match.params.ID))
       .get()
       .then((snapshot) => {
         var array1 = [];
-          console.log("LENGTH" + snapshot.docs.length);
-          if (snapshot.docs.length === 0) {
-            this.setState({ found: false });
-            console.log("ZERO" )
+        console.log("LENGTH" + snapshot.docs.length);
+        if (snapshot.docs.length === 0) {
+          this.setState({ found: false });
+          console.log("ZERO");
+        } else {
+          console.log(snapshot.docs.length);
 
-          }
-          else{
-            
-             console.log(snapshot.docs.length)
-            
-            snapshot.docs.forEach((doc) => {
-              console.log(doc.data());
-              var review = {
-                title: doc.data().title,
-                desc: doc.data().desc,
-                amount: doc.data().amount,
-                stars: doc.data().stars,
-                review:doc.data().review,
-                userID:doc.data().userID,
-                date:doc.data().date,
-              };
-              array1.push(review);
-              // this.state.providers.push(provider)
-              console.log("exce1");
-           
-              //code to show service providers
-              this.setState({ workReviews: array1 });
-              this.setState({ found: true });
-              
-            });
+          snapshot.docs.forEach((doc) => {
+            console.log(doc.data());
+            var review = {
+              title: doc.data().title,
+              desc: doc.data().desc,
+              amount: doc.data().amount,
+              stars: doc.data().stars,
+              review: doc.data().review,
+              userID: doc.data().userID,
+              date: doc.data().date,
+            };
+            array1.push(review);
+            // this.state.providers.push(provider)
+            console.log("exce1");
 
-          }
-        
+            //code to show service providers
+            this.setState({ workReviews: array1 });
+            this.setState({ found: true });
+          });
+        }
       })
       .catch((err) => {
         console.log("error : " + err);
       });
-}
+  }
 
- async editButton(){
+  async editButton() {
+    var buttonText = document.getElementById("EditSubmitButton").innerHTML;
+    if (buttonText == "Edit") {
+      const user = localStorage.getItem("user");
+      const loggedInUser = user != null ? JSON.parse(user) : null;
 
-  var buttonText=document.getElementById("EditSubmitButton").innerHTML;
-  if(buttonText=='Edit'){
-
-    
-          const user = localStorage.getItem("user");
-          const loggedInUser = user != null ? JSON.parse(user) : null;
-
-          if(loggedInUser.userid!=String(this.props.match.params.ID)){
-
-            alert("You don't have permission to edit ")
-            return ;
-          }
-          else{
-
-            this.setState({
-              editable:true
-            })
-
-            document.getElementById("EditSubmitButton").innerHTML="Update";
-            
-          }
-
-  }else{
-
-    //update function firbase
-
-  var query= await firebase.firestore().collection("serviceProviders").doc(this.state.docID);
-     
-      query.update({
-          name:this.state.userInfo.name,
-          occupation:this.state.userInfo.occupation,
-          email:this.state.userInfo.email,
-          location:this.state.userInfo.location,
-          phone:this.state.userInfo.phone,
-          pincode:this.state.userInfo.pincode
-
-      })
-      .then((query)=>{
-        
-        alert("successfully Updated");
-        document.getElementById("EditSubmitButton").innerHTML="Edit";
+      if (loggedInUser.userid != String(this.props.match.params.ID)) {
+        alert("You don't have permission to edit ");
+        return;
+      } else {
         this.setState({
-          editable:false
+          editable: true,
+        });
+
+        document.getElementById("EditSubmitButton").innerHTML = "Update";
+      }
+    } else {
+      //update function firbase
+
+      var query = await firebase
+        .firestore()
+        .collection("serviceProviders")
+        .doc(this.state.docID);
+
+      query
+        .update({
+          name: this.state.userInfo.name,
+          occupation: this.state.userInfo.occupation,
+          email: this.state.userInfo.email,
+          location: this.state.userInfo.location,
+          phone: this.state.userInfo.phone,
+          pincode: this.state.userInfo.pincode,
         })
+        .then((query) => {
+          alert("successfully Updated");
+          document.getElementById("EditSubmitButton").innerHTML = "Edit";
+          this.setState({
+            editable: false,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          alert("err");
+        });
+    }
+  }
+
+  addReviewButton() {
+    const user = localStorage.getItem("user");
+    const loggedInUser = user != null ? JSON.parse(user) : null;
+
+    if (loggedInUser.userid == String(this.props.match.params.ID)) {
+      alert("you cannot add review to your own work");
+      return;
+    } else if (loggedInUser.isProvider == true) {
+      alert("Service Provider cannot add review to another service provider");
+      return;
+    }
+    var id = String(this.props.match.params.ID);
+    window.location.href = "/addreview/" + id;
+  }
+
+  async sortButton(e) {
+    const sorted = this.state.workReviews.sort(
+      (a, b) => Number(b["stars"]) - Number(a["stars"])
+    );
+
+    console.log(sorted);
+    this.setState({
+      workReviews: sorted,
+    });
+  }
+
+  resetLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getLocation);
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  async getLocation(position) {
+    console.log(
+      `Latitude: ${position.coords.latitude} ,Longitude: ${position.coords.longitude}`
+    );
+    console.log(typeof this.state.latitude);
+    this.setState({ latitude: position.coords.latitude });
+    this.setState({ longitude: position.coords.longitude });
+    let latitude1 = 25.360972099999998;
+    let longitude1 = 82.9731705;
+    let coordinates = [longitude1, latitude1];
+
+    var a = await this.getCity(coordinates);
+    console.log(a);
+    // console.log("adsfadsf" + hash);
+    var query = await firebase
+      .firestore()
+      .collection("serviceProviders")
+      .doc(this.state.docID);
+
+    query
+      .update({
+        latitude: this.state.latitude,
+        longitude: this.state.longitude,
+        // location: city,
       })
-      .catch(err=>{
+      .then((query) => {
+        alert("successfully Updated");
+        document.getElementById("resetLocation").innerHTML = "Reset Location";
+      })
+      .catch((err) => {
         console.log(err);
-        alert("err")
-      })
-
+        alert("err");
+      });
   }
+  getCity(coordinates) {
+    var xhr = new XMLHttpRequest();
+    var lat = coordinates[1];
+    var lng = coordinates[0];
+    var city = "";
 
-
-}
-
-
-addReviewButton(){
-  const user = localStorage.getItem("user");
-  const loggedInUser = user != null ? JSON.parse(user) : null;
-
-  if(loggedInUser.userid==String(this.props.match.params.ID)){
-    alert("you cannot add review to your own work");
-    return;
+    xhr.open(
+      "GET",
+      "https://us1.locationiq.com/v1/reverse.php?key=pk.9ee43fe4d55822ed019121eb4cdc6430&lat=" +
+        lat +
+        "&lon=" +
+        lng +
+        "&format=json",
+      true
+    );
+    xhr.send();
+    xhr.onreadystatechange = processRequest;
+    xhr.addEventListener("readystatechange", processRequest, false);
+    function processRequest(e) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = JSON.parse(xhr.responseText);
+        var city1 = response.address.city;
+        console.log(city1);
+        city += city1;
+        return;
+      }
+    }
+    console.log(city);
+    return city;
   }
-  else if(loggedInUser.isProvider==true){
-    alert("Service Provider cannot add review to another service provider");
-    return;
-
-  }
-  var id=String(this.props.match.params.ID);
-  window.location.href="/addreview/" +id ;
-
-}
-
-
-
-async sortButton(e){
-
-
-  
-
-  const sorted = this.state.workReviews.sort((a, b) => Number(b['stars']) - Number(a['stars']));
-
-  console.log(sorted);
-  this.setState({
-    workReviews:sorted
-  });
-
-
-
-}
-
-
 
   render() {
-
-    
     return (
-      
-            <div id="back">
-         <div id="accountHeader">
-           <h3>Account Information</h3>
-         </div>
-         <br></br>
+      <div id="back">
+        <div id="accountHeader">
+          <h3>Account Information</h3>
+        </div>
+        <br></br>
 
         <div id="profileDiv">
           <form>
             <label id="x1">Name </label> <br></br>
-            {this.state.editable ?
-                <input id="formName" type="text"  onChange={this.nameHandler} value={this.state.userInfo.name}/>
-                :
-                <input id="formName" type="text" readOnly onChange={this.nameHandler} value={this.state.userInfo.name}/> 
-            }
-            <br></br><br></br>
-            
+            {this.state.editable ? (
+              <input
+                id="formName"
+                type="text"
+                onChange={this.nameHandler}
+                value={this.state.userInfo.name}
+              />
+            ) : (
+              <input
+                id="formName"
+                type="text"
+                readOnly
+                onChange={this.nameHandler}
+                value={this.state.userInfo.name}
+              />
+            )}
+            <br></br>
+            <br></br>
             <label id="x1">Email </label> <br></br>
-            {this.state.editable ?
-                <input id="formEmail" type="text"  onChange={this.emailHandler} value={this.state.userInfo.email}/>
-                :
-                <input id="formEmail" type="text" readOnly onChange={this.emailHandler} value={this.state.userInfo.email}/>
-            }
-            <br></br><br></br>
-
-            
+            {this.state.editable ? (
+              <input
+                id="formEmail"
+                type="text"
+                onChange={this.emailHandler}
+                value={this.state.userInfo.email}
+              />
+            ) : (
+              <input
+                id="formEmail"
+                type="text"
+                readOnly
+                onChange={this.emailHandler}
+                value={this.state.userInfo.email}
+              />
+            )}
+            <br></br>
+            <br></br>
             <label id="x1">Location </label> <br></br>
-            {this.state.editable ?
-                <input id="formLocation" type="text"  onChange={this.locationHandler} value={this.state.userInfo.location}/>
-                :
-                <input id="formLocation" type="text" readOnly onChange={this.locationHandler} value={this.state.userInfo.location}/>
-            }
-            <br></br><br></br>
+            {this.state.editable ? (
+              <input
+                id="formLocation"
+                type="text"
+                onChange={this.locationHandler}
+                value={this.state.userInfo.location}
+              />
+            ) : (
+              <input
+                id="formLocation"
+                type="text"
+                readOnly
+                onChange={this.locationHandler}
+                value={this.state.userInfo.location}
+              />
+            )}
+            <br></br>
+            <br></br>
             <label id="x1">PinCode </label> <br></br>
-            {this.state.editable ?
-                <input id="formLocation" type="text"  onChange={this.pinCodeHandler} value={this.state.userInfo.pincode}/>
-                :
-                <input id="formLocation" type="text" readOnly onChange={this.pinCodeHandler} value={this.state.userInfo.pincode}/>
-            }
-            <br></br><br></br>
-
+            {this.state.editable ? (
+              <input
+                id="formLocation"
+                type="text"
+                onChange={this.pinCodeHandler}
+                value={this.state.userInfo.pincode}
+              />
+            ) : (
+              <input
+                id="formLocation"
+                type="text"
+                readOnly
+                onChange={this.pinCodeHandler}
+                value={this.state.userInfo.pincode}
+              />
+            )}
+            <br></br>
+            <br></br>
             <label id="x1">Mobile</label> <br></br>
-            {this.state.editable ?
-                <input id="formPhone" type="text"  onChange={this.mobileHandler} value={this.state.userInfo.phone}/>
-                :
-                <input id="formPhone" type="text" readOnly onChange={this.mobileHandler} value={this.state.userInfo.phone}/>
-            }
-            <br></br><br></br>
-
+            {this.state.editable ? (
+              <input
+                id="formPhone"
+                type="text"
+                onChange={this.mobileHandler}
+                value={this.state.userInfo.phone}
+              />
+            ) : (
+              <input
+                id="formPhone"
+                type="text"
+                readOnly
+                onChange={this.mobileHandler}
+                value={this.state.userInfo.phone}
+              />
+            )}
+            <br></br>
+            <br></br>
             <label id="x1">Occupation </label> <br></br>
-            {this.state.editable ?
-                 <input id="formOccupation" type="text" onChange={this.occupationHandler} value={this.state.userInfo.occupation}/> 
-                :
-                <input id="formOccupation" type="text" readOnly onChange={this.occupationHandler} value={this.state.userInfo.occupation}/>
-            }
-            <br></br><br></br>
-
-
+            {this.state.editable ? (
+              <input
+                id="formOccupation"
+                type="text"
+                onChange={this.occupationHandler}
+                value={this.state.userInfo.occupation}
+              />
+            ) : (
+              <input
+                id="formOccupation"
+                type="text"
+                readOnly
+                onChange={this.occupationHandler}
+                value={this.state.userInfo.occupation}
+              />
+            )}
+            <br></br>
+            <br></br>
           </form>
-          {
-            this.state.userid==(this.props.match.params.ID)?
-            <button id="EditSubmitButton" onClick={this.editButton}>Edit</button>
-            :
+          {this.state.userid == this.props.match.params.ID ? (
+            <button id="EditSubmitButton" onClick={this.editButton}>
+              Edit
+            </button>
+          ) : (
             <span></span>
-
-          }
+          )}
           &emsp; &emsp;
-          {
-            this.state.userid!=(this.props.match.params.ID) && this.state.isProvider!=true?
-            <button onClick={this.addReviewButton} id="addReviewButton" className="btn-primary ">Add Review<br></br><span id="razorpayButtontext">Visible to all users</span> </button>
-            :
+          {this.state.userid == this.props.match.params.ID ? (
+            <button id="resetLocation" onClick={this.resetLocation}>
+              Reset location
+            </button>
+          ) : (
             <span></span>
-
-          }
-           &emsp; &emsp;
-           
-          <a target="_blank" href="https://pages.razorpay.com/pl_HM6OLew1sO2kDi/view"> <button id="razorpayButton" className="btn-primary" >Pay<br></br><span id="razorpayButtontext">Powered by Razorpay</span></button></a>
-          
-
-          
-          
-           
-
+          )}
+          &emsp; &emsp;
+          {this.state.userid != this.props.match.params.ID &&
+          this.state.isProvider != true ? (
+            <button
+              onClick={this.addReviewButton}
+              id="addReviewButton"
+              className="btn-primary "
+            >
+              Add Review<br></br>
+              <span id="razorpayButtontext">Visible to all users</span>{" "}
+            </button>
+          ) : (
+            <span></span>
+          )}
+          &emsp; &emsp;
+          <a
+            target="_blank"
+            href="https://pages.razorpay.com/pl_HM6OLew1sO2kDi/view"
+          >
+            {" "}
+            <button id="razorpayButton" className="btn-primary">
+              Pay<br></br>
+              <span id="razorpayButtontext">Powered by Razorpay</span>
+            </button>
+          </a>
         </div>
         <hr></hr>
         <div id="profileReview">
-            <div id="profileReviewHeader">
-                  <h3 id="heading">Previous Work</h3>
-                  <button onClick={this.sortButton} id="sortButton" className="btn-primary ">sort by rating</button>
-                  <br></br><br></br>
-            </div>
+          <div id="profileReviewHeader">
+            <h3 id="heading">Previous Work</h3>
+            <button
+              onClick={this.sortButton}
+              id="sortButton"
+              className="btn-primary "
+            >
+              sort by rating
+            </button>
             <br></br>
-            <div id="reviewCards">
-
-            {
-            this.state.found == false
-            ? <div id="profileReviewHeader">
-                   <h6>No Previous Work available !</h6>
-
+            <br></br>
+          </div>
+          <br></br>
+          <div id="reviewCards">
+            {this.state.found == false ? (
+              <div id="profileReviewHeader">
+                <h6>No Previous Work available !</h6>
               </div>
-            :
-            
-             this.state.workReviews.map((review) => {
-              return <Preview key={review.userID} review={review}/>;
-            })
-            }
-
-
-
-            </div>
-
+            ) : (
+              this.state.workReviews.map((review) => {
+                return <Preview key={review.userID} review={review} />;
+              })
+            )}
+          </div>
         </div>
-
-    </div>
-
-
-
-
+      </div>
     );
   }
 }
