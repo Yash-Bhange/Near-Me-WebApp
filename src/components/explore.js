@@ -80,14 +80,17 @@ class Explore extends Component {
   async getCity() {
     var lat = this.state.latitude;
     var lng = this.state.longitude;
-
+    console.log(lat,lng)
+//pk.632d0cb01fd6f28de3de49ef1903fb06
     const api = axios.create({
-      baseURL: `http://api.positionstack.com/v1/reverse?access_key=ba90edb95b5567234d9e3ae0cc94f4d5&query=${lat},${lng}`,
+      baseURL: `https://us1.locationiq.com/v1/reverse.php?key=pk.632d0cb01fd6f28de3de49ef1903fb06&lat=${lat}&lon=${lng}&format=json`,
     });
 
-    let res = await api.get("");
 
-    this.setState({ city: res.data.data[0].locality });
+    let res = await api.get("");
+    console.log(res.data.address.city);
+
+    this.setState({ city: res.data.address.city });
   }
 
   go() {
